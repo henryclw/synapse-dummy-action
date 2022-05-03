@@ -63,4 +63,4 @@ jobs:
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
 
       - name: Echo different output of set-tag
-        run: echo "The old set-tag output is {{ steps.set-tag-old.outputs.tags }} \n The new set-tag output is  matrixdotorg/synapse:${{ steps.set-tag-new.outputs.tag }}"
+        run: echo "The old set-tag output is  matrixdotorg/synapse:${{ steps.set-tag-old.outputs.tag }} \n The new set-tag output is ${{ steps.set-tag-new.outputs.tags }}"
