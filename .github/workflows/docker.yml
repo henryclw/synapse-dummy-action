@@ -59,8 +59,8 @@ jobs:
           tags: |
             type=pep440,pattern={{raw}}
             type=raw,value=develop,enable=${{ github.ref == format('refs/heads/{0}', 'develop') }}
-            type=raw,value=latest,enable=${{ github.ref == "refs/heads/master" }}
-            type=raw,value=latest,enable=${{ github.ref == "refs/heads/main" }}
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
 
       - name: Echo different output of set-tag
         run: echo "The old set-tag output is {{ steps.set-tag-old.outputs.tags }} \n The new set-tag output is  matrixdotorg/synapse:${{ steps.set-tag-new.outputs.tag }}"
