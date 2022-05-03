@@ -57,12 +57,10 @@ jobs:
           flavor: |
             latest=false
           tags: |
+            type=pep440,pattern={{raw}}
             type=raw,value=develop,enable=${{ github.ref == "refs/heads/develop" }}
             type=raw,value=latest,enable=${{ github.ref == "refs/heads/master" }}
             type=raw,value=latest,enable=${{ github.ref == "refs/heads/main" }}
-            type=pep440,pattern={{raw}}
-            # set latest tag for master branch
-            type=raw,value=latest,enable=${{ github.ref == "refs/heads/master" }}
 
       - name: Echo different output of set-tag
         run: echo "The old set-tag output is {{ steps.set-tag-old.outputs.tags }} \n The new set-tag output is  matrixdotorg/synapse:${{ steps.set-tag-new.outputs.tag }}"
