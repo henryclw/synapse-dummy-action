@@ -65,14 +65,5 @@ jobs:
       - name: Echo different output of set-tag
         run: echo "The old set-tag output is  matrixdotorg/synapse:${{ steps.set-tag-old.outputs.tag }} \n The new set-tag output is ${{ steps.set-tag-new.outputs.tags }}"
 
-      - name: Build and no push
-        uses: docker/build-push-action@v2
-        with:
-          push: false
-          labels: "gitsha1=${{ github.sha }}"
-          tags: "${{ steps.set-tag-new.outputs.tags }}"
-          file: "./Dockerfile"
-          platforms: linux/amd64,linux/arm64
-
-      - name: Run docker container
-        run: docker run --name dummy_docker "${{ steps.set-tag-new.outputs.tags }}"
+      - name: Build and run docker container
+        run: docker build -t "${{ steps.set-tag-new.outputs.tags }}" . && docker run --name dummy_docker "${{ steps.set-tag-new.outputs.tags }}"
